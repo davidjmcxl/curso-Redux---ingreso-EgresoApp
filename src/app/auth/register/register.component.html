@@ -11,7 +11,7 @@
                 <input type="test" class="form-control" placeholder="Nombre" formControlName="nombre">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-check-circle"  [class.green]="registerForm.get('nombre')?.valid"></i>
                   </span>
                 </div>
               </div>
@@ -21,7 +21,7 @@
                 <input type="email" class="form-control" placeholder="Correo" formControlName="correo">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-check-circle"  [class.green]="registerForm.get('correo')?.valid" ></i>
                   </span>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                 <input type="password" class="form-control" placeholder="Password" formControlName="password">
                 <div class="input-group-append">
                   <span class="input-group-text">
-                    <i class="fa fa-check-circle"></i>
+                    <i class="fa fa-check-circle" [class.green]="registerForm.get('password')?.valid"></i>
                   </span>
                 </div>
               </div>
