@@ -12,10 +12,7 @@ export const initialState: State = {
 
 export const _authReducer = createReducer(initialState,
 
-    on(setUser, (state ,{user})=>({
-        ...state,user:{
-            ...user
-        }
+    on(setUser, (state ,{user})=>({ ...state,user:{...user}
     })),
     on(unSetUser,state=>({
         ...state,user:null

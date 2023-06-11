@@ -1,19 +1,21 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { isLoading, stopLoading } from 'src/app/shared/ui.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit ,OnDestroy {
   public cargando:boolean=false;
+  uiSubcrition!:Subscription;
   loginForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -27,9 +29,13 @@ export class LoginComponent implements OnInit {
       correo: ['test1@gmail.com', [Validators.required, Validators.email]],
       password: ['123456', Validators.required],
     });
-    this.store.select('ui').subscribe(ui=>{
-      this.cargando=ui.isLoading;
-    })
+   this.uiSubcrition = this.store.select('ui').subscribe(
+                          ui=>{
+                            this.cargando=ui.isLoading;
+                          })
+  }
+  ngOnDestroy(): void {
+    this.uiSubcrition.unsubscribe();
   }
   login() {
     if (this.loginForm.invalid) {
