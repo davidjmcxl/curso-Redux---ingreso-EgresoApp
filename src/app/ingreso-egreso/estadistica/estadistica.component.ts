@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { ChartData, ChartType, ChartEvent } from 'chart.js';
 import { AppState } from 'src/app/app.reducer';
 import { IngresoEgreso } from 'src/app/models/ingreso-egreso.model';
+import { appStateWithIngreso } from '../ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-estadistica',
@@ -17,7 +18,7 @@ export class EstadisticaComponent implements OnInit {
   totalIngresos:number=0;
   totalEgresos:number=0;
 
-  constructor(private store:Store<AppState>) { }
+  constructor(private store:Store<appStateWithIngreso>) { }
   public doughnutChartLabels: string[] = [ 'Ingresos', 'Egresos' ];
   public doughnutChartData!: ChartData<'doughnut'>
   public doughnutChartType: ChartType = 'doughnut';
